@@ -1,0 +1,252 @@
+/* MagicMirror² Config Sample
+ *
+ * By Michael Teeuw https://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information on how you can configure this file
+ * see https://docs.magicmirror.builders/configuration/introduction.html
+ * and https://docs.magicmirror.builders/modules/configuration.html
+ */
+let config = {
+	address: "localhost", 	// Address to listen on, can be:
+							// - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+							// - another specific IPv4/6 to listen on a specific interface
+							// - "0.0.0.0", "::" to listen on any interface
+							// Default, when address config is left out or empty, is "localhost"
+	port: 8080,
+	basePath: "/", 	// The URL path where MagicMirror² is hosted. If you are using a Reverse proxy
+					// you must set the sub path here. basePath must end with a /
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], 	// Set [] to allow all IP addresses
+															// or add a specific IPv4 of 192.168.1.5 :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+															// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+
+	useHttps: false, 		// Support HTTPS or not, default "false" will use HTTP
+	httpsPrivateKey: "", 	// HTTPS private key path, only require when useHttps is true
+	httpsCertificate: "", 	// HTTPS Certificate path, only require when useHttps is true
+
+	language: "en",
+	locale: "en-US",
+	logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
+	timeFormat: 9,
+	units: "metric",
+	// serverOnly:  true/false/"local" ,
+	// local for armv6l processors, default
+	//   starts serveronly and then starts chrome browser
+	// false, default for all NON-armv6l devices
+	// true, force serveronly mode, because you want to.. no UI on this device
+
+	modules: [
+		{
+			module: "alert",
+		},
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
+		{
+			module: "clock",
+			position: "top_left"
+		},
+		{
+			module: "calendar",
+			header: "Holidays",
+			position: "top_left",
+			config: {
+				calendars: [
+					{
+						symbol: "calendar-check",
+						url: "https://www.calendarlabs.com/ical-calendar/ics/33/India_Holidays.ics",
+						maximumEntries: 5,
+						//url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"
+					},
+					
+				]
+			}
+		},
+		{
+		module: "calendar",
+			header: "MY CALENDER",
+			position: "top_left",
+			config: {
+				calendars: [
+		   {
+			symbol: "vineth-check",
+			url: "https://calendar.google.com/calendar/ical/vinethks07%40gmail.com/private-3ca4b1035e131bb17867dd44391f80f2/basic.ics",
+			maximumEntries: 3,
+		   }
+		]
+	}
+},
+{
+	module: "calendar",
+		header: "DEEPAN ",
+		position: "top_left",
+		config: {
+			calendars: [
+	   {
+		symbol: "vineth-check",
+		url: "https://calendar.google.com/calendar/ical/deepansundharam24%40gmail.com/private-8fd0d3e1359b0ba1a4f7bf8099731c61/basic.ics",
+		maximumEntries: 3,
+	   }
+	]
+}
+},
+{
+	module: "calendar",
+		header: "YUGENDRA BALAJI ",
+		position: "top_left",
+		config: {
+			calendars: [
+	   {
+		symbol: "vineth-check",
+		url: "https://calendar.google.com/calendar/ical/yugendrabalaji27%40gmail.com/private-db14b7ca8f5e361d8141cd234085d83b/basic.ics",
+		maximumEntries: 3,
+	   }
+	]
+}
+},
+{
+	module: "calendar",
+		header: "KAVIN RAJ ",
+		position: "top_left",
+		config: {
+			calendars: [
+	   {
+		symbol: "vineth-check",
+		url: "https://calendar.google.com/calendar/ical/vinethjawa2001%40gmail.com/private-6fac977dfc9a9d68ae3e19098857c708/basic.ics"
+	   }
+	]
+}
+},
+		{
+			module: "compliments",
+			position: "lower_third"
+		},
+		{
+			module: "weather",
+			position: "top_right",
+			config: {
+				weatherProvider: "openweathermap",
+				type: "current",
+				location: "State of Tamil Nādu",
+				locationID: "1255053", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				apiKey: "cb723d2b632ea63efefb8646e23ec91e"
+			}
+		},
+		{
+			module: "weather",
+			position: "top_right",
+			header: "Weather Forecast",
+			config: {
+				weatherProvider: "openweathermap",
+				type: "forecast",
+				location: "State of Tamil Nādu",
+				locationID: "1255053", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				apiKey: "cb723d2b632ea63efefb8646e23ec91e"
+			}
+		},
+		{
+			module: "newsfeed",
+			position: "bottom_bar",
+			config: {
+				feeds: [
+					{
+						title: "Tamil Nadu NEWS",
+						url: "https://www.thehindu.com/news/national/tamil-nadu/feeder/default.rss"
+					}
+				],
+				showSourceTitle: true,
+				showPublishDate: true,
+				broadcastNewsFeeds: true,
+				broadcastNewsUpdates: true
+			}
+		},
+		  {
+			module: 'facts',
+			position: 'top_bar',
+			
+			config: {
+					updateInterval: 5,	
+					fadeSpeed: 4,			
+					category: 'random',	
+			}
+			
+		},
+		{
+  module: 'MMM-SmartTouch', 
+  position: 'bottom_right',    // This can be any of the regions.(bottom-center Recommended)
+  config:{ 
+    // None configuration options defined 
+  }
+},
+{
+	module: 'MMM-QRCode',
+	position: 'top_left', // change the position according to your need best position is either bottom right or left.
+	config: {
+		text: 'https://youtu.be/5oH9Nr3bKfw', // enter your message here.
+		showRaw: true, // true = to show the text, false = to hide the text.
+		imageSize: 150, // size is in px (both the height and with are equal).
+		colorDark: "#fff" ,// set qrcode px color.
+		colorLight: "#000" ,// set backgroud background color(by default color is BLACK).
+	}
+},
+{
+            module: 'MMM-OnThisDay',
+            position: "top_right", // All available positions
+            config: {
+                // See below for configurable options, this is optional
+            }
+        },
+       
+         { module: "MMM-NowPlayingOnSpotify",
+             position: "bottom_left",
+           config: { 
+                 controle: "hidden",
+                    }
+           };
+
+        /* {  
+             module: "MMM-NowPlayingOnSpotify",
+             position: "bottom_left",
+
+             config: {
+             clientID: "8ae819c504c64dfb95fd32154bb2aeef",
+             clientSecret: "d27387983ae743d695466588fa43ce3a",
+             accessToken: "BQDvzb1ic698PLX1N05p00i3QDfM9F4S-aAhECEqQLi9uq2eQ8jKWM8Ydkx2KjD-cF-xBIJRnIg9q-sSTyO3HTTaxkNQohcP1au9D8gSsLkyFpzPpQ9EY2Fs7GsfasPpf6HWNIP63PE-mD1plKbQSP8DPIN55Z_A3iliRFJoxLJ_v6qeu1pY4OoAGxQJRjqfwbkbAPSi1AwTtA",
+             refreshToken: "AQDcl8YWLk5VGFv95Y9OtjWUQ6vs9o5pCN3S-ttRTVgSu8GmD7zP0VfweYr0VwZo24cGkiFPjWKhVACjJ6jr8d81UPR02NhtnKZVcvGI-O5LiPja-aGMfKu1QczZ_0HfYoM"
+             }
+         },
+        
+         {
+disabled: false,
+module: "Hello-Lucy",
+position: "top_center",
+config: {
+    keyword: 'HELLO LUCY',              // keyword to activate listening for a command/sentence
+    timeout: 15,                        // timeout listening for a command/sentence
+    standByMethod: 'DPMS',              // 'DPMS' = anything else than RPi or 'PI'
+    microphone: "0,0",                  // run "arecord -l" card # and device # mine is "0,0"
+    sounds: ["1.mp3", "11.mp3"],        // welcome sound at startup. Add several for a random greetings
+    confirmationSound: "ding.mp3",      // name and extension of sound file
+    startHideAll: true,                 // All modules start as hidden EXCEPT PAGE ONE
+    // *** Page One is your default startup page *** This overrides startHideAll: true,
+    pageOneModules: ["Hello-Lucy","MMM-EasyPix"],                     // default modules to show on page one/startup
+    pageTwoModules: ["Hello-Lucy", "MMM-BMW-DS", "MMM-EventHorizon"], // modules to show on page two
+    pageThreeModules: ["Hello-Lucy", "MMM-Lunartic"],                 // modules to show on page three
+    pageFourModules: ["Hello-Lucy", "MMM-PC-Stats"],                  // modules to show on page four
+    pageFiveModules: ["Hello-Lucy", "MMM-Searchlight"],               // modules to show on page five
+    pageSixModules: ["Hello-Lucy", "MMM-NOAA3"],                      // modules to show on page six
+    pageSevenModules: ["Hello-Lucy", "MMM-Recipe"],                   // modules to show on page seven
+    pageEightModules: ["Hello-Lucy", "MMM-rfacts"],                   // modules to show on page eight
+    pageNineModules: ["Hello-Lucy", "MMM-History"],                   // modules to show on page nine
+    pageTenModules: ["Hello-Lucy", "MMM-HardwareMonitor"]             // modules to show on page ten
+    }
+},*/
+        
+	]
+};
+
+/***** DO NOT EDIT THE LINE BELOW *****/
+if (typeof module !== "undefined") {module.exports = config;}
